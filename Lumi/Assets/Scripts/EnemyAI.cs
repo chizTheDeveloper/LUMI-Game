@@ -44,7 +44,7 @@ public class EnemyAI : MonoBehaviour
         if (distance <= attackRadius)
         {
             transform.LookAt(player.transform);
-            //player.TakeDamage(1);
+            player.TakeDamage(1);
             Debug.Log("damage");
         }
 

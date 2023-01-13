@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         currentXP = 0;
-        //xpBar.SetMaxXP(maxXP);
-        //xpBar.SetXP(currentXP);
+        xpBar.SetMaxXP(maxXP);
+        xpBar.SetXP(currentXP);
     }
 
     // Update is called once per frame
