@@ -17,8 +17,6 @@ public class EnemyAI : MonoBehaviour
     public Player player;
     public float FollowSpeed;
 
-    public float AllowedDistance = 20;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,39 +29,43 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if(distance <= lookRadius)
+        if(distance <= lookRadius && distance >= stopRadius)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position,FollowSpeed);
             FollowSpeed = 0.2f;
             transform.LookAt(player.transform);
 
-
-            if (distance <= attackRadius)
-            {
-                player.TakeDamage(1);
-                Debug.Log("damage");
-            }
-
-            if(distance <= stopRadius){
-                FollowSpeed = 0;
-            }
-
+        
         }else{
+            transform.LookAt(player.transform);
             FollowSpeed = 0;
         }
 
-       if(gameObject.GetComponent<EnemyHealth>().currentHealth == 0){
-         Destroy(gameObject);
+        if (distance <= attackRadius)
+        {
+            transform.LookAt(player.transform);
+            //player.TakeDamage(1);
+            Debug.Log("damage");
         }
+
+         if(distance <= stopRadius){
+            transform.LookAt(player.transform);
+            FollowSpeed = 0;
+        }
+
+       //if(gameObject.GetComponent<EnemyHealth>().currentHealth == 0){
+         //Destroy(gameObject);
+       // }
     }
 
-
+    /*
    void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,direction.y,direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+    */
 
     void OnDrawGizmosSelected()
     {
