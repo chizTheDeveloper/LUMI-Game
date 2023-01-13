@@ -59,6 +59,10 @@ public class QuestTracker : MonoBehaviour
                 triggerDialogue = true;
             }
         }
+
+        /*if(interactingWith == "companion"){
+
+        }*/
     }
 
     IEnumerator StartQuests(float time)
@@ -83,8 +87,8 @@ public class QuestTracker : MonoBehaviour
         nameText.enabled = true;
         dialogueText.enabled = true;
         cont.enabled = true;
-        Debug.Log("TRIGGERED EVENT");
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        string speakNpc = "npc";
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, speakNpc);
     }
         
 }

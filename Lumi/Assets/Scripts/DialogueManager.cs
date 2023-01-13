@@ -15,9 +15,10 @@ public class DialogueManager : MonoBehaviour
         text = new Queue<string>();
     }
 
-    public void StartDialogue(Dialogue dialogue){
+    public void StartDialogue(Dialogue dialogue, string speakingWith){
 
         nameText.text = dialogue.name;
+        dialogue.text[0] = "Here is some test example text that loads initially when the dialogue is triggered.";
         text.Clear();
 
         foreach(string sentence in dialogue.text){

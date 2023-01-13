@@ -104370,6 +104370,7 @@ GameObject:
   - component: {fileID: 1605308929}
   - component: {fileID: 1605308928}
   - component: {fileID: 1605308930}
+  - component: {fileID: 1605308931}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -104482,13 +104483,29 @@ MonoBehaviour:
   dialogue:
     name: Octopus
     text:
-    - Here is some example text that loads initially when the dialogue is triggered.
+    - 
     - Some more text to show that pressing the Enter/Return key on your keyboard
       goes to the next piece of dialogue.
     - Yay, it works!
   nameText: {fileID: 1732828915}
   dialogueText: {fileID: 561685830}
   cont: {fileID: 292186436}
+--- !u!114 &1605308931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605308924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6e2808511011141b003ffd131b960d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbles: []
+  bub: {fileID: 919132149155446097, guid: 7c52d4baab6fcc846b9b50b63238fa13, type: 3}
+  playerPos: {fileID: 1605308928}
+  wayFacing: {x: 0, y: 0, z: 0}
 --- !u!1001 &1607426750
 PrefabInstance:
   m_ObjectHideFlags: 0
