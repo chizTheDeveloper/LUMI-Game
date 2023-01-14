@@ -1,14 +1,16 @@
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class ResourceGenerator : MonoBehaviour
 {
     [Header("Spawn Setup")]
     [SerializeField] private FlockUnit flockUnitPrefab;
     [SerializeField] private int flockSize;
-    [SerializeField] private Vector3 spawnBounds;
 
     [Header("Speed Setup")]
     [Range(0, 10)]
@@ -17,7 +19,6 @@ public class ResourceGenerator : MonoBehaviour
     [Range(0, 10)]
     [SerializeField] private float _maxSpeed;
     public float maxSpeed { get { return _maxSpeed; } }
-
 
     [Header("Detection Distances")]
 
@@ -65,10 +66,14 @@ public class ResourceGenerator : MonoBehaviour
     public float obstacleWeight { get { return _obstacleWeight; } }
 
     public FlockUnit[] allUnits { get; set; }
+    BoxCollider spawnBound;
 
     private void Start()
     {
+        spawnBound = GetComponent<BoxCollider>();
+        spawnBound.isTrigger = true;
         GenerateUnits();
+
     }
 
     private void Update()
@@ -85,10 +90,26 @@ public class ResourceGenerator : MonoBehaviour
         for (int i = 0; i < flockSize; i++)
         {
             var randomVector = UnityEngine.Random.insideUnitSphere;
-            randomVector = new Vector3(randomVector.x * spawnBounds.x, randomVector.y * spawnBounds.y, randomVector.z * spawnBounds.z);
+            randomVector = new Vector3(randomVector.x * (transform.localScale.x / 2), randomVector.y * (transform.localScale.y / 2), randomVector.z * (transform.localScale.z / 2));
             var spawnPosition = transform.position + randomVector;
             var rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
-            allUnits[i] = Instantiate(flockUnitPrefab, spawnPosition, rotation);
+
+            RaycastHit[] hit = Physics.RaycastAll(spawnPosition, new Vector3(0, -1000, 0));
+            if (hit.Length != 0)
+            {
+                for (int j = 0; j < hit.Length; j++)
+                {
+                    if (hit[j].collider.gameObject.tag != "Spawner" && hit[j].collider.gameObject.tag != "Player")
+                    {
+                        spawnPosition = hit[j].point;
+                        allUnits[i] = Instantiate(flockUnitPrefab, spawnPosition, rotation);
+                        allUnits[i].transform.up = hit[j].normal;
+                    }
+                }
+
+            }
+
+
             //allUnits[i].AssignFlock(this);
             // allUnits[i].InitializeSpeed(UnityEngine.Random.Range(minSpeed, maxSpeed));
         }
