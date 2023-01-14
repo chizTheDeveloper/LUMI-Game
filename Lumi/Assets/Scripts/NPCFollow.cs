@@ -6,7 +6,7 @@ public class NPCFollow : MonoBehaviour
 {
     public GameObject Player;
     public float TargetDistance;
-    public float AllowedDistance = 20;
+    public float AllowedDistance = 25;
     public GameObject NPC;
     public float FollowSpeed;
     public RaycastHit Shot;
