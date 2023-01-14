@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if(distance <= lookRadius && distance >= stopRadius)
+        if(distance <= lookRadius)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position,FollowSpeed);
             FollowSpeed = 0.2f;
@@ -37,19 +37,16 @@ public class EnemyAI : MonoBehaviour
 
         
         }else{
-            transform.LookAt(player.transform);
             FollowSpeed = 0;
         }
 
         if (distance <= attackRadius)
         {
-            transform.LookAt(player.transform);
             player.TakeDamage(1);
             Debug.Log("damage");
         }
 
          if(distance <= stopRadius){
-            transform.LookAt(player.transform);
             FollowSpeed = 0;
         }
 
