@@ -32,11 +32,11 @@ public class QuestTracker : MonoBehaviour
         npcOrigin = new Vector3(5751.4f, 39, -12435);
 
         // Coroutine to start krill companion intro
-        StartCoroutine(Intro(5));
+        StartCoroutine(Intro(4));
         
         // Setting some variables that are used throughout progress
         hasStarted = false;
-        interactingWith = "companion";
+        interactingWith = "";
         triggerDialogue = false;
         jellyfishCollected = 0;
 
@@ -85,7 +85,7 @@ public class QuestTracker : MonoBehaviour
         {
             // If intro has been passed, trigger the start of the quest system
             if(item.Contains("intro")){
-                StartCoroutine(StartQuests(5));
+                StartCoroutine(StartQuests(10));
             }
             // If player has finished their first encounter with the octopus npc
             else if(item.Contains("firstNpcEncounter")){
@@ -103,6 +103,7 @@ public class QuestTracker : MonoBehaviour
     {
         // Wait before starting companion intro dialogue
         yield return new WaitForSeconds(time);
+        interactingWith = "companion";
     }
 
     IEnumerator StartQuests(float time)
