@@ -32,7 +32,7 @@ public class EnemyAI : MonoBehaviour
         if(distance <= lookRadius)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position,FollowSpeed);
-            FollowSpeed = 0.2f;
+            FollowSpeed = 0.3f;
             transform.LookAt(player.transform);
 
         
