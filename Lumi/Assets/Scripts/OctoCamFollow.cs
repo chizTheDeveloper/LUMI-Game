@@ -9,17 +9,14 @@ public class OctoCamFollow : MonoBehaviour
     public Transform npc;
     float mouseX;
     float mouseY;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
+        // Get mouse position
         mouseX += Input.GetAxis("Mouse X");
         mouseY += Input.GetAxis("Mouse Y");
+
+        // Change the rotation of the octopus npc focus camera when they move the mouse
         octoCam.transform.localRotation = Quaternion.Euler(-mouseY * 0.6f, mouseX * 0.6f, 0);
         octoCam.transform.position = player.transform.position;
     }

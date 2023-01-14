@@ -5,8 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
+    // Variable for the name of the person talking
     public string name;
-    //[TextArea(0, 20)]
-    //public string[] text;
+
+    // List to hold all part of the dialogue
     public List<string> text = new List<string>();
 }

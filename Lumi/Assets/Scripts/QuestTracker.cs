@@ -18,6 +18,7 @@ public class QuestTracker : MonoBehaviour
 
     public Vector3 velocity = Vector3.one;
     public Vector3 currPos;
+    Vector3 npcOrigin;
 
     public Dialogue dialogue;
 
@@ -25,14 +26,15 @@ public class QuestTracker : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI cont;
 
-    // Start is called before the first frame update
     void Start()
     {
-        // Coroutine for being approached by the octopus npc, set to 5 seconds for testing
-        
+        // Origin location for NPC so he can be sent back to that area when he's not interacting with the player
+        npcOrigin = new Vector3(5751.4f, 39, -12435);
+
+        // Coroutine to start krill companion intro
         StartCoroutine(Intro(5));
-        //StartCoroutine(StartQuests(5));
         
+        // Setting some variables that are used throughout progress
         hasStarted = false;
         interactingWith = "companion";
         triggerDialogue = false;
@@ -41,12 +43,12 @@ public class QuestTracker : MonoBehaviour
         // Default to main camera
         mainCam.SetActive(true);
 
+        // Hide the dialogue UI
         nameText.enabled = false;
         dialogueText.enabled = false;
         cont.enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Once octopus has been met and quests have started
@@ -63,6 +65,7 @@ public class QuestTracker : MonoBehaviour
             // Apply the change in position
             npc.transform.position = smooth;
 
+            // If dialogue hasn't been triggered yet, start coroutine to swap to the npc camera
             if(triggerDialogue == false){
                 // Change which camera is active while npc is talking to you
                 StartCoroutine(SwapCameras(2));
@@ -70,21 +73,28 @@ public class QuestTracker : MonoBehaviour
             }
         }
 
+        // If player is interacting with the companion npc, use the main camera and trigger companion dialogue
         if(interactingWith == "companion"){
             octoCam.SetActive(false);
             mainCam.SetActive(true);
-            Debug.Log("Companion");
             TriggerCompDial();
         }
         
+        // Cycle through the progress milestones
         foreach(string item in progress)
         {
+            // If intro has been passed, trigger the start of the quest system
             if(item.Contains("intro")){
                 StartCoroutine(StartQuests(5));
             }
+            // If player has finished their first encounter with the octopus npc
             else if(item.Contains("firstNpcEncounter")){
                 mainCam.SetActive(true);
-                octoCam.SetActive(true);
+                octoCam.SetActive(false);
+
+                // Switch to the main camera and send the octopus npc out of the scene
+                Vector3 smoothSendBack = Vector3.SmoothDamp(npc.transform.position, npcOrigin, ref velocity, 0.3f);
+                npc.transform.position = smoothSendBack;
             }
         }
     }
@@ -106,26 +116,37 @@ public class QuestTracker : MonoBehaviour
     {
         // Set quest system to "has started" to trigger first octopus encounter in Update
         yield return new WaitForSeconds(time);
+        
+        // Switch to octopus npc camera
         octoCam.SetActive(true);
         mainCam.SetActive(false);
+
+        // Trigger the dialogue
         triggerDialogue = true;
         Trigger();
-
     }
 
+    // Trigger function for octopus npc dialogue
     public void Trigger(){
+        // Show dialogue UI
         nameText.enabled = true;
         dialogueText.enabled = true;
         cont.enabled = true;
+
+        // Start "StartDialogue" function in the dialogue manager, pass who the player is interacting with to the function
         string speakNpc = "npc";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, speakNpc);
+        interactingWith = "";
     }
 
     public void TriggerCompDial(){
+        // Show dialogue UI
         nameText.enabled = true;
         dialogueText.enabled = true;
         cont.enabled = true;
-        string speakComp = "intro";
+
+        // Start "StartDialogue" function in the dialogue manager, pass who the player is interacting with to the function
+        string speakComp = "krill";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, speakComp);
         interactingWith = "";
     }

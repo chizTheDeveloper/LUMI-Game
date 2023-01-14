@@ -8,7 +8,6 @@ public class Movement : MonoBehaviour
 {
     public CharacterController characterController;
     public float playerSpeed = 5000;
-    //public Camera camera;
     float mouseX;
     float mouseY;
 

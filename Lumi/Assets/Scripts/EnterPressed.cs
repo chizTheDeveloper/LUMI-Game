@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class EnterPressed : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        // Check if enter (return) key has been pressed and go to next sentence in the dialogue set
         if (Input.GetKeyDown("return") || Input.GetKeyDown(KeyCode.Return)){
             FindObjectOfType<DialogueManager>().DisplayNext();
         }
