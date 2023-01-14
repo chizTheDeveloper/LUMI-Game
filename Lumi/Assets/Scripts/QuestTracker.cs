@@ -101,7 +101,7 @@ public class QuestTracker : MonoBehaviour
 
     IEnumerator Intro(float time)
     {
-        // Wait before starting companion dialogue
+        // Wait before starting companion intro dialogue
         yield return new WaitForSeconds(time);
     }
 
