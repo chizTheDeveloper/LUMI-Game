@@ -7,14 +7,20 @@ using TMPro;
 public class QuestTracker : MonoBehaviour
 {
     public GameObject npc;
-    public bool hasStarted;
-    public int jellyfishCollected;
-    public Vector3 velocity = Vector3.one;
     public GameObject mainCam;
     public GameObject octoCam;
+
+    public bool hasStarted;
+    public bool triggerDialogue;
+    public int jellyfishCollected;
+    public string interactingWith;
+    public List<string> progress = new List<string>();
+
+    public Vector3 velocity = Vector3.one;
     public Vector3 currPos;
-    bool triggerDialogue;
+
     public Dialogue dialogue;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI cont;
@@ -23,8 +29,12 @@ public class QuestTracker : MonoBehaviour
     void Start()
     {
         // Coroutine for being approached by the octopus npc, set to 5 seconds for testing
-        StartCoroutine(StartQuests(5));
+        
+        StartCoroutine(Intro(5));
+        //StartCoroutine(StartQuests(5));
+        
         hasStarted = false;
+        interactingWith = "companion";
         triggerDialogue = false;
         jellyfishCollected = 0;
 
@@ -60,9 +70,29 @@ public class QuestTracker : MonoBehaviour
             }
         }
 
-        /*if(interactingWith == "companion"){
+        if(interactingWith == "companion"){
+            octoCam.SetActive(false);
+            mainCam.SetActive(true);
+            Debug.Log("Companion");
+            TriggerCompDial();
+        }
+        
+        foreach(string item in progress)
+        {
+            if(item.Contains("intro")){
+                StartCoroutine(StartQuests(5));
+            }
+            else if(item.Contains("firstNpcEncounter")){
+                mainCam.SetActive(true);
+                octoCam.SetActive(true);
+            }
+        }
+    }
 
-        }*/
+    IEnumerator Intro(float time)
+    {
+        // Wait before starting companion dialogue
+        yield return new WaitForSeconds(time);
     }
 
     IEnumerator StartQuests(float time)
@@ -89,6 +119,15 @@ public class QuestTracker : MonoBehaviour
         cont.enabled = true;
         string speakNpc = "npc";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, speakNpc);
+    }
+
+    public void TriggerCompDial(){
+        nameText.enabled = true;
+        dialogueText.enabled = true;
+        cont.enabled = true;
+        string speakComp = "intro";
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, speakComp);
+        interactingWith = "";
     }
         
 }
