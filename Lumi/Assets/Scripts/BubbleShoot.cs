@@ -21,7 +21,7 @@ public class BubbleShoot : MonoBehaviour
             wayFacing = playerPos.transform.forward;
 
             // Create instance of bubble
-            bub = (GameObject)Instantiate(Resources.Load("bubbleShoot2"));
+            bub = (GameObject)Instantiate(Resources.Load("bubbleNew"));
 
             // Change position of the bubble and its scale
             bub.transform.position = playerPos.transform.position;
