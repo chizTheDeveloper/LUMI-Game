@@ -53,9 +53,9 @@ public class EnemyAI : MonoBehaviour
             FollowSpeed = 0;
         }
 
-       //if(gameObject.GetComponent<EnemyHealth>().currentHealth == 0){
-         //Destroy(gameObject);
-       // }
+       if(gameObject.GetComponent<EnemyHealth>().currentHealth == 0){
+         Destroy(gameObject);
+        }
     }
 
     /*
