@@ -91,8 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4882345017334527425}
   - component: {fileID: 5444273122096716853}
-  - component: {fileID: 6718463388387754038}
-  - component: {fileID: -4019585444127682954}
   m_Layer: 0
   m_Name: blender_fish
   m_TagString: Untagged
@@ -127,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1ff174794d5e94b868655ee9c8b7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FOVAngle: 5
-  smoothDamp: 1
+  FOVAngle: 2
+  smoothDamp: 10
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
@@ -137,25 +135,3 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0}
   - {x: 0, y: -1, z: 0}
   - {x: 0, y: -1, z: 0}
---- !u!64 &6718463388387754038
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5227063162170191739}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: d52dccde5b4db0e4d829bf39532bff88, type: 3}
---- !u!33 &-4019585444127682954
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5227063162170191739}
-  m_Mesh: {fileID: -2432090755550338912, guid: d52dccde5b4db0e4d829bf39532bff88, type: 3}
