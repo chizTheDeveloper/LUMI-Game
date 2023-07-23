@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - bubble
+  - SP
+  - key
+  - orb
+  - jelly
+  - npc
+  - SpecialBlob
+  - NPC
+  - timer
+  - walldestroy
+  - nextLevel
+  - heart
+  - nextLevel2
+  - nextLevel3
+  - bossblob
+  - CoralTrail
+  - enemy
+  - damage
+  - EnemyZoom
+  - questDest
+  - questApp
+  - Krill
+  - Wayfacing
+  - KrakenLeg
+  - Kraken
+  - Weak
+  - Blob
+  - WhiteScreen
+  - octoChat
+  - octoChatIcon
+  - gemSound
+  - deathScreen
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Obstacle
+  - Player
+  - MapOnly
+  - Spawner
+  - Enemy
+  - MinimapTile
+  - Krill
+  - Leg
+  - Blob
+  - BigMapOnly
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
